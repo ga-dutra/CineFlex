@@ -5,11 +5,21 @@ import { MovieContext } from "../contexts/MovieContext";
 import { useNavigate } from "react-router-dom";
 
 function Movie({ posterImg, title, overview, movieId }) {
+  const { playingMovies, setMovieSelected } = useContext(MovieContext);
   const navigate = useNavigate();
   return (
     <MovieContainer>
       <img
-        onClick={() => navigate(`/filme/${movieId}`)}
+        onClick={() => {
+          setMovieSelected(
+            playingMovies.filter((value) => {
+              if (value.id === movieId) {
+                return value;
+              } else return false;
+            })
+          );
+          navigate(`/filme/${movieId}`);
+        }}
         src={posterImg}
         alt={`${title} Poster`}
       />
