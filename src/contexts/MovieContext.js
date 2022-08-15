@@ -5,8 +5,8 @@ const MovieContext = createContext();
 const MovieStorage = ({ children }) => {
   const [playingMovies, setPlayingMovies] = useState({});
   const [movieSelected, setMovieSelected] = useState({});
-
   const [sessionSelected, setSessionSelected] = useState({});
+  const [seats, setSeats] = useState({});
 
   return (
     <MovieContext.Provider
@@ -17,6 +17,8 @@ const MovieStorage = ({ children }) => {
         setMovieSelected,
         sessionSelected,
         setSessionSelected,
+        seats,
+        setSeats,
       }}
     >
       {children}

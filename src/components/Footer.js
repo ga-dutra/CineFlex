@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export default function Footer({ poster, title, session }) {
   return (
-    <FooterWrapper>
+    <FooterWrapper session={session}>
       <MovieContainer>
         <img src={poster} alt="" />
       </MovieContainer>
       <div>
         <p>{title}</p>
-        <p>{session ? { session } : ""}</p>
+        <p>{session ? session : ""}</p>
       </div>
     </FooterWrapper>
   );
@@ -32,9 +32,9 @@ const FooterWrapper = styled.div`
 
   p {
     color: #293845;
-    font-size: 20px;
+    font-size: ${(props) => (props.session ? "18px" : "22px")};
     line-height: 30px;
-    margin-left: 10px;
+    margin-left: 16px;
   }
 `;
 

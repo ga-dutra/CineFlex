@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../contexts/MovieContext";
 import { getMovieSessions } from "../services/cineflex";
@@ -8,6 +9,7 @@ let sessions = [];
 export default function SessionsPage() {
   const { playingMovies, movieSelected, sessionSelected, setSessionSelected } =
     useContext(MovieContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const promise = getMovieSessions(movieSelected[0].id);
@@ -40,7 +42,15 @@ export default function SessionsPage() {
               </p>
               <SessionsContainer>
                 {value.showtimes.map((item) => (
-                  <div key={item.id}>{item.name}</div>
+                  <div
+                    onClick={() => {
+                      setSessionSelected(value);
+                      navigate(`/sessao/${item.id}`);
+                    }}
+                    key={item.id}
+                  >
+                    {item.name}
+                  </div>
                 ))}
               </SessionsContainer>
             </>
@@ -72,7 +82,7 @@ const Wrapper = styled.div`
     font-size: 18px;
     line-height: 20px;
     font-style: italic;
-    margin-bottom: 22px;
+    margin-bottom: 30px;
   }
   h3 {
     color: #293845;
